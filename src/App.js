@@ -21,7 +21,12 @@ const reducer = (state, { type, payload }) => {
           currentNumber: payload.digit,
         };
       }
-      if (payload.digit === "0" && state.currentNumber === "0") return state;
+      if (
+        (payload.digit === "0" && state.currentNumber === "0") ||
+        (payload.digit === "00" && state.currentNumber === "00") ||
+        (payload.digit === "000" && state.currentNumber === "000")
+      )
+        return state;
       if (payload.digit === "." && state.currentNumber.includes("."))
         return state;
       return {
@@ -113,6 +118,12 @@ const evaluate = ({ currentNumber, previousNumber, operation }) => {
     case "*":
       computation = prev * curr;
       break;
+    case "e":
+      computation = prev ** curr;
+      break;
+    case "√":
+      computation = prev ** (1 / curr);
+      break;
   }
 
   return computation;
@@ -169,8 +180,12 @@ const App = () => {
       <DigitButton digit={"8"} dispatch={dispatch} />
       <DigitButton digit={"9"} dispatch={dispatch} />
       <OperationButton operation={"-"} dispatch={dispatch} />
-      <DigitButton digit={"."} dispatch={dispatch} />
+      <DigitButton digit={"00"} dispatch={dispatch} />
       <DigitButton digit={"0"} dispatch={dispatch} />
+      <DigitButton digit={"000"} dispatch={dispatch} />
+      <OperationButton operation={"√"} dispatch={dispatch} />
+      <OperationButton operation={"E"} dispatch={dispatch} />
+      <DigitButton digit={"."} dispatch={dispatch} />
       <button
         className="span-two"
         onClick={() => dispatch({ type: ACTION.EVALUATE })}

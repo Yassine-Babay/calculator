@@ -184,7 +184,7 @@ const App = () => {
       <DigitButton digit={"0"} dispatch={dispatch} />
       <DigitButton digit={"000"} dispatch={dispatch} />
       <OperationButton operation={"√"} dispatch={dispatch} />
-      <OperationButton operation={"E"} dispatch={dispatch} />
+      <OperationButton operation={"e"} dispatch={dispatch} />
       <DigitButton digit={"."} dispatch={dispatch} />
       <button
         className="span-two"
